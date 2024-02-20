@@ -118,4 +118,34 @@ public class Tablero {
         }
         return distanciasFinales;
     }
+
+    public boolean isTresCasillasLibres(){
+        int contador = 0;
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                if(tablero[i][j].getEstado().equals(Estado.NOVISITADO.toString())){
+                    contador++;
+                    if(contador == 3){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isDosCasillasLibres(){
+        int contador = 0;
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                if(tablero[i][j].getEstado().equals(Estado.NOVISITADO.toString())){
+                    contador++;
+                    if(contador == 2){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
