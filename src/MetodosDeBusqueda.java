@@ -54,7 +54,7 @@ public void Estrella(Stack<Casilla> F, Casilla inicio, String nombre){
         this.OS = Expand(EA);
         this.OS = EvaluateHeuristic(OS, inicio);
         F = insert (F, OS);
-        F = Sort(F);
+        F = sort(F);
         Estrella(F, inicio, nombre);
     }
 }
@@ -81,28 +81,34 @@ private Stack<Casilla> EvaluateHeuristic(Stack<Casilla> OS, Casilla inicio){
     return OS;
 }
 
-private Stack<Casilla> Sort(Stack<Casilla> OS){
-    ArrayList<Casilla> Orden = new ArrayList<Casilla>();
-    while (!OS.isEmpty()){
-        Orden.add(OS.pop());
+private Stack<Casilla> sort(Stack<Casilla> OS) {
+
+    ArrayList<Casilla> Ordenar = new ArrayList<Casilla> ();
+    while(!OS.isEmpty()){
+        Ordenar.add(OS.pop());
     }
-     Collections.sort(Orden, new Comparator<Casilla>(){
+
+    // Ordenar el ArrayList utilizando un Comparator
+    Collections.sort(Ordenar, new Comparator<Casilla>() {
         @Override
-        public int compare(Casilla c1, Casilla c2){
-            return Double.compare(c1.getDistanciaFinal(), c2.getDistanciaFinal());
+        public int compare(Casilla casilla2, Casilla casilla1) {
+            // Comparar las distancias de menor a mayor
+            return Double.compare(casilla1.getDistanciaFinal(), casilla2.getDistanciaFinal());
         }
-     }
-     );
+    });
 
-     for (Casilla casilla : Orden){
-         if(casilla.getEstado().equals(Estado.NOVISITADO.toString())){
-             OS.push(casilla);
-         }
-     }
-
-     return OS;
+    for(Casilla casilla : Ordenar){
+        if(casilla.getEstado().equals(Estado.NOVISITADO.toString())){
+            OS.push(casilla);
+        }
+        
+    }
+ 
+    return OS;
 }
 
+//aqui va mi metodo original
+        
 private Stack<Casilla> insert(Stack<Casilla> F, Stack<Casilla> OS){
     while (!OS.isEmpty()){
         Casilla actual = OS.pop();
