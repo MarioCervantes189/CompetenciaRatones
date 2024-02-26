@@ -32,10 +32,10 @@ public void run(){
     Fila.add(this.inicio);
     Estrella(Fila,this.inicio,this.nombreCasilla);
     if (this.encontrado){
-        System.out.println("Se encontro el camino" + nombreCasilla);
+        System.out.println("Gano el raton: " + nombreCasilla);
         imprimeTableroEstrella();
     }else{
-        System.out.println("No se encontro el camino" + nombreCasilla);
+        System.out.println("Perdio el raton: " + nombreCasilla);
     }
 }
 
@@ -76,6 +76,7 @@ private Stack<Casilla> EvaluateHeuristic(Stack<Casilla> OS, Casilla inicio){
     for (int i = 0; i < OS.size(); i++){
         Casilla casillaEvaluada = OS.get(i);
         casillaEvaluada.setDistanciaFinal((getDistanciaLineal(inicio, casillaEvaluada) + getDistanciaRecorrida(casillaEvaluada, this.tablero.getQueso())));
+        OS.set(i, casillaEvaluada);
     }
     return OS;
 }
